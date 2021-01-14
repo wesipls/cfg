@@ -29,6 +29,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 "map <Leader> <Plug>(easymotion-prefix)
 "Airline
 Plug 'bling/vim-airline'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 set number
