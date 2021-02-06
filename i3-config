@@ -117,4 +117,4 @@ bindsym XF86MonBrightnessDown exec light -U 3
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 
-exec feh --bg-scale /home/vesipls/Downloads/beautiful-morning-in-forest-4k-4l.jpg
+exec sh ./.fehbg
