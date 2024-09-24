@@ -1,0 +1,131 @@
+[arch-update]
+command=../../.resources/i3blocks-contrib/arch-update/arch-update
+interval=3600
+markup=pango
+align=left
+min_width=160
+
+[bandwidth LAN]
+command=../../.resources/i3blocks-contrib/bandwidth/bandwidth
+interval=5
+label=NETWORK 
+INTERFACE=enp5s0
+#INLABEL=IN 
+#OUTLABEL=OUT
+min_width=180
+align=center
+color=#7aa2f7
+
+[ReadWrite]
+command=iostat -dyzm | grep sdb | awk '{print "R "$3" mb/s | W "$4" mb/s"}'
+label=/DEV/SDB | 
+interval=5
+min_width=280
+align=center
+color=#7aa2f7
+
+[home_usage]
+command=lsblk -ao NAME,FSTYPE,FSSIZE,FSUSED,FSUSE% | grep home | awk '{print $5}'
+label=HOME 
+interval=5
+color=#e0af68
+min_width=70
+align=center
+
+[root_usage]
+command=lsblk -ao NAME,FSTYPE,FSSIZE,FSUSED,FSUSE% | grep root | awk '{print $5}'
+label=ROOT 
+interval=5
+color=#e0af68
+min_width=70
+align=center
+
+[disk_temp]
+command=sudo smartctl /dev/sdb -a | grep Temp | awk '{print "+"$10"°C"}'
+label=DISK 
+interval=5
+color=#bb9af7
+min_width=90
+align=center
+
+[psu_temp]
+command=sensors | grep "AUXTIN1:" | awk '{print $2}' | cut -b1-3,6-8
+label=PSU 
+interval=5
+color=#bb9af7
+min_width=80
+align=center
+
+[sys_temp]
+command=sensors | grep "SYSTIN:" | awk '{print $2}' | cut -b1-3,6-8
+label=SYS 
+interval=5
+color=#bb9af7
+min_width=80
+align=center
+
+[cpu_temp]
+command=sensors | grep "Tctl" | awk '{print $2}' | cut -b1-3,6-8
+label=CPU 
+interval=5
+color=#bb9af7
+min_width=80
+align=center
+
+[gpu_temp]
+command=sensors | grep edge | awk '{print $2}' | cut -b1-3,6-8
+label=GPU 
+interval=5
+color=#bb9af7
+min_width=80
+align=center
+
+[memory]
+command=../../.resources/i3blocks-contrib/memory/memory | grep -v "G"
+label=SWAP 
+instance=swap
+interval=5
+color=#9ece6a
+min_width=70
+align=center
+
+[memory]
+command=../../.resources/i3blocks-contrib/memory/memory | grep -v "G"
+label=RAM 
+interval=5
+color=#9ece6a
+min_width=70
+align=center
+
+[vram_usage]
+command=../../.resources/i3blocks-contrib/gpu-load/gpu-load | awk '{print $2}'
+label=VRAM 
+interval=5
+color=#9ece6a
+min_width=70
+align=center
+
+[cpu_usage]
+command=../../.resources/i3blocks-contrib/cpu_usage/cpu_usage
+interval=5
+LABEL=CPU 
+DECIMALS=0
+COLOR_NORMAL=#9ece6a
+COLOR_WARN=#9ece6a
+COLOR_CRIT=#9ece6a
+min_width=70
+align=center
+
+[weather]
+command=curl -Ss 'https://wttr.in/?format="%t+(%f)+%w"' | xargs echo
+interval=3600
+color=#c0caf5
+min_width=160
+align=center
+
+[time]
+command=date "+%a %d %b %H:%M"
+interval=5
+min_width=140
+align=center
+color=#c0caf5
