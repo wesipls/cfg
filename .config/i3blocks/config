@@ -1,131 +1,108 @@
-[arch-update]
-command=../../.resources/i3blocks-contrib/arch-update/arch-update
-interval=3600
-markup=pango
-align=left
-min_width=160
+
+[RAM]
+command=./ram.sh
+interval=30
+min_width=128
+align=center
+color=#a9b1d6
+
+[SWAP]
+command=./swap.sh
+interval=30
+min_width=128
+align=center
+color=#a9b1d6
 
 [bandwidth LAN]
-command=../../.resources/i3blocks-contrib/bandwidth/bandwidth
+command=/usr/lib/i3blocks/bandwidth/bandwidth
 interval=5
-label=NETWORK 
 INTERFACE=enp5s0
-#INLABEL=IN 
+#INLABEL=IN
 #OUTLABEL=OUT
-min_width=180
+min_width=128
 align=center
-color=#7aa2f7
+color=#a9b1d6
+min_width=160
 
-[ReadWrite]
-command=iostat -dyzm | grep sdb | awk '{print "R "$3" mb/s | W "$4" mb/s"}'
-label=/DEV/SDB | 
-interval=5
-min_width=280
+[cpu]
+command=./cpu.sh
+interval=30
 align=center
-color=#7aa2f7
+color=#a9b1d6
+min_width=160
 
-[home_usage]
-command=lsblk -ao NAME,FSTYPE,FSSIZE,FSUSED,FSUSE% | grep home | awk '{print $5}'
-label=HOME 
-interval=5
-color=#e0af68
-min_width=70
+[gpu]
+command=./gpu.sh
+interval=30
 align=center
+color=#a9b1d6
+min_width=160
 
-[root_usage]
-command=lsblk -ao NAME,FSTYPE,FSSIZE,FSUSED,FSUSE% | grep root | awk '{print $5}'
-label=ROOT 
-interval=5
-color=#e0af68
-min_width=70
-align=center
-
-[disk_temp]
-command=sudo smartctl /dev/sdb -a | grep Temp | awk '{print "+"$10"°C"}'
-label=DISK 
-interval=5
-color=#bb9af7
-min_width=90
-align=center
-
-[psu_temp]
-command=sensors | grep "AUXTIN1:" | awk '{print $2}' | cut -b1-3,6-8
-label=PSU 
-interval=5
-color=#bb9af7
-min_width=80
+[disk-io]
+command=/usr/lib/i3blocks/disk-io/disk-io -M
+#command=/usr/lib/i3blocks/disk-io/disk-io -w 3 -M -P 0
+interval=persist
+LABEL=RW: 
+#instance=/^sda/
+#DT=5
+#MB_ONLY=1 #0 or 1
+#KB_ONLY=0 #0 or 1
+#WIDTH=4
+#MB_PRECISION=1
+#KB_PRECISION=0
+#REGEX=/^(s|h)d[a-zA-Z]+/
+#THRESHOLD=0
+#WARN_COLOR="#FF0000"
+#SEPARATOR=/
+#PREFIX=
+#SUFFIX="B/s"
+min_width=160
 align=center
 
-[sys_temp]
-command=sensors | grep "SYSTIN:" | awk '{print $2}' | cut -b1-3,6-8
-label=SYS 
-interval=5
-color=#bb9af7
-min_width=80
-align=center
 
-[cpu_temp]
-command=sensors | grep "Tctl" | awk '{print $2}' | cut -b1-3,6-8
-label=CPU 
-interval=5
-color=#bb9af7
-min_width=80
+[ssd temp]
+command=sudo smartctl -a /dev/sda | grep Temperature | awk -F " " '{print " +"$10 ".0°C"}'
+label=SDA TEMP:
+interval=30
 align=center
+color=#a9b1d6
+min_width=128
 
-[gpu_temp]
-command=sensors | grep edge | awk '{print $2}' | cut -b1-3,6-8
-label=GPU 
-interval=5
-color=#bb9af7
-min_width=80
+[SDA space left]
+command=df -h | grep root | awk -F " " '{print " "$5}'
+label=SDA USED:
+interval=60
 align=center
+color=#a9b1d6
+min_width=100
 
-[memory]
-command=../../.resources/i3blocks-contrib/memory/memory | grep -v "G"
-label=SWAP 
-instance=swap
-interval=5
-color=#9ece6a
-min_width=70
+[updates]
+command=./updates.sh
+interval=300
 align=center
+color=#a9b1d6
+min_width=160
 
-[memory]
-command=../../.resources/i3blocks-contrib/memory/memory | grep -v "G"
-label=RAM 
-interval=5
-color=#9ece6a
-min_width=70
-align=center
-
-[vram_usage]
-command=../../.resources/i3blocks-contrib/gpu-load/gpu-load | awk '{print $2}'
-label=VRAM 
-interval=5
-color=#9ece6a
-min_width=70
-align=center
-
-[cpu_usage]
-command=../../.resources/i3blocks-contrib/cpu_usage/cpu_usage
-interval=5
-LABEL=CPU 
-DECIMALS=0
-COLOR_NORMAL=#9ece6a
-COLOR_WARN=#9ece6a
-COLOR_CRIT=#9ece6a
-min_width=70
-align=center
 
 [weather]
-command=curl -Ss 'https://wttr.in/?format="%t+(%f)+%w"' | xargs echo
-interval=3600
-color=#c0caf5
-min_width=160
+command=./weather.sh
+interval=600
+min_width=250
+align=center
+color=#a9b1d6
+
+[VPN]
+command=./vpn.sh
+label=VPN:
+interval=30
+min_width=128
+color=#a9b1d6
 align=center
 
 [time]
 command=date "+%a %d %b %H:%M"
 interval=5
-min_width=140
+min_width=128
 align=center
-color=#c0caf5
+color=#a9b1d6
+

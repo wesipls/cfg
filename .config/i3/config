@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Source Code Pro 9
+font pango:OverpassM Nerd Font Mono 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -21,22 +21,22 @@ font pango:Source Code Pro 9
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
+#exec --no-startup-id dex --autostart --environment i3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 
 #custom execs
-exec --no-startup-id xrandr --output DisplayPort-0 --mode 1280x1024 --pos 0x28 --rotate normal --output DisplayPort-1 --mode 1280x1024 --pos 3200x28 --rotate normal --output DisplayPort-2 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output HDMI-A-0 --off
-exec --no-startup-id feh --bg-scale /home/wesipls/.resources/wallpaper.jpg
+exec --no-startup-id xrandr --output DisplayPort-0 --mode 1280x1024 --pos 0x28 --rotate normal --output DisplayPort-1 --mode 1280x1024 --pos 3200x28 --rotate normal --output DisplayPort-2 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output HDMI-1 --off
+exec --no-startup-id feh --bg-fill --no-xinerama Documents/Untitled.png
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -48,13 +48,13 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
-
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+BackSpace exec --no-startup-id qutebrowser
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -nf '#C0CAF5' -nb '#1A1B26' -sb '#1A1B26' -sf '#9ece6a' -fn "Source Code Pro"
+bindsym $mod+d exec --no-startup-id dmenu_run -nf '#C0CAF5' -nb '#1A1B26' -sb '#1A1B26' -sf '#9ece6a' -fn "Overpass"
 #bindsym $mod+d exec "dmenu_run -nf '#C0CAF5' -nb '#1A1B26' -sb '#1A1B26' -sf '#bb9af7' -fn 'monospace-10' -p 'dmenu prompt &gt;'"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -192,11 +192,11 @@ bar {
 	position top
 	output primary
 	workspace_buttons no
-	font pango:Source Code Pro 9
+	font pango:Overpass 9
 	colors {
 		background #1a1b26
-		statusline #c0caf5
-		separator #c0caf5
+		statusline #a9b1d6
+		separator #a9b1d6
     }
 }
 
@@ -204,3 +204,7 @@ bar {
 gaps inner 4
 gaps outer 4
 for_window [class="^.*"] border pixel 2
+client.background #1a1b26
+client.unfocused #a9b1d6 #1a1b26 #a9b1d6 #a9b1d6 #a9b1d6
+client.focused_inactive #a9b1d6 #1a1b26 #a9b1d6 #a9b1d6 #a9b1d6
+client.focused #7aa2f7 #1a1b26 #7aa2f7 #7aa2f7 #7aa2f7
